@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>使用者輸入比較</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .red {
+      background-color: #FF6347;
+      color: white;
+    }
+
+    .light-blue {
+      background-color: #ADD8E6;
+      color: black;
+    }
+
+    .dark-blue {
+      background-color: #00008B;
+      color: white;
+    }
+
+    .green {
+      background-color: #32CD32;
+      color: white;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+    }
+
+    .result-container {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+  </style>
+  <script>
+    window.onload = function() {
+      var firstInput = prompt("請輸入第一個數字");
+      if (firstInput === null || firstInput === "") {
+        alert("請輸入有效的數字");
+        return;
+      }
+
+      var secondInput = prompt("請輸入第二個數字");
+      if (secondInput === null || secondInput === "") {
+        alert("請輸入有效的數字");
+        return;
+      }
+
+      firstInput = parseFloat(firstInput);
+      secondInput = parseFloat(secondInput);
+
+      if (isNaN(firstInput) || isNaN(secondInput)) {
+        alert("請輸入有效的數字");
+        return;
+      }
+
+      var result = document.getElementById('resultContainer');
+
+      if (firstInput > secondInput) {
+        result.innerHTML = firstInput + ' > ' + secondInput;
+        document.body.style.backgroundColor = 'lightblue';
+      } else if (secondInput > firstInput) {
+        result.innerHTML = firstInput + ' < ' + secondInput;
+        document.body.style.backgroundColor = 'orange';
+      } else {
+        result.innerHTML = firstInput + ' == ' + secondInput;
+        document.body.style.backgroundColor = 'lightyellow';
+      }
+
+      document.getElementById('showFirstInput').onclick = function() {
+        alert('第一個輸入是：' + firstInput);
+      };
+
+      document.getElementById('showSecondInput').onclick = function() {
+        alert('第二個輸入是：' + secondInput);
+      };
+    };
+
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+
+    function resetColor() {
+      document.body.style.backgroundColor = ''; // 將背景顏色重置為空，恢復瀏覽器默認值
+    }
+
+  </script>
+</head>
+<body>
+  <div class="button-container">
+    <button class="button red" id="showFirstInput">Button 1</button>
+    <button class="button light-blue" id="showSecondInput">Button 2</button>
+    <button class="button dark-blue" onclick="changeColor('darkblue')">Button 3</button>
+    <button class="button green" onclick="changeColor('green')">Button 4</button>
+    <button class="button" onclick="resetColor()">Reset</button>
+  </div>
+  <div class="result-container" id="resultContainer"></div>
+</body>
+</html>
